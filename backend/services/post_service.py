@@ -1,7 +1,9 @@
 from typing import List
+
+from db.mongodb import get_database
 from models.post_model import PostModel
 from schemas.post_schemas import PostCreate, PostResponse
-from db.mongodb import get_database
+
 
 class PostService:
     def __init__(self):

@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
 from typing import List
+
+from fastapi import APIRouter, Depends
 from schemas.post_schemas import PostCreate, PostResponse
 from services.post_service import PostService
 

@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
 from typing import List
+
+from fastapi import APIRouter, Depends
 from schemas.event_schemas import EventCreate, EventResponse
 from services.event_service import EventService
 

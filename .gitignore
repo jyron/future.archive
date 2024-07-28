@@ -98,4 +98,4 @@ venv.bak/
 dm
 
 .DS_Store
-
+.vscode

@@ -1,7 +1,9 @@
 from typing import List
+
+from db.mongodb import get_database
 from models.event_model import EventModel
 from schemas.event_schemas import EventCreate, EventResponse
-from db.mongodb import get_database
+
 
 class EventService:
     def __init__(self):

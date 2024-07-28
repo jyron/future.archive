@@ -1,24 +1,23 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
-import pendulum
 from pydantic import BaseModel, Field
 
-
-def utc_now():
-    return pendulum.now('UTC')
 
 class EventCreate(BaseModel):
     title: str
     description: str
-    start_date: datetime
+    event_start: Optional[datetime] = None
+    event_end: Optional[datetime] = None
     location_id: Optional[str] = None
-    category: Optional[str] = None
+    tag_ids: List[str] = []
 
 class EventResponse(BaseModel):
     id: str
     title: str
     description: str
-    start_date: Optional[datetime]
+    created_at: datetime
+    event_start: Optional[datetime] = None
+    event_end: Optional[datetime] = None
     location_id: Optional[str] = None
-    category: Optional[str] = None
+    tag_ids: List[str]

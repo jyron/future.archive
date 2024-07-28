@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -9,11 +9,13 @@ class PostCreate(BaseModel):
     event_id: Optional[str] = None
     location_id: Optional[str] = None
     author_name: Optional[str] = None
+    tag_ids: List[str] = []
 
 class PostResponse(BaseModel):
     id: str
     content: str
-    timestamp: datetime
+    created_at: datetime
     event_id: Optional[str] = None
     location_id: Optional[str] = None
     author_name: Optional[str] = None
+    tag_ids: List[str]

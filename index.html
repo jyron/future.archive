@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future Archive</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Future Archive</h1>
+      <nav>
+        <ul>
+          <li><a href="#home-section">Home</a></li>
+          <li><a href="#current-events-section">Current Events</a></li>
+          <li>
+            <a href="#submit-entry-section" class="cta-button"
+              >Record Your Experience</a
+            >
+          </li>
+          <li><a href="#browse-entries-section">Browse Entries</a></li>
+          <li><a href="#timeline-section">Timeline</a></li>
+          <li><a href="#about-section">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <!-- Home Section -->
+      <section id="home-section" class="content-section">
+        <h2>Welcome to Future Archive</h2>
+        <p>Preserving today's experiences for tomorrow's understanding.</p>
+
+        <div id="featured-events">
+          <h3>Featured Current Events</h3>
+          <p>Explore the most significant events happening right now.</p>
+          <!-- Event cards will be dynamically inserted here -->
+        </div>
+
+        <div id="latest-entries">
+          <h3>Latest Entries</h3>
+          <p>Read recent first-hand accounts from our contributors.</p>
+          <!-- Entry snippets will be dynamically inserted here -->
+        </div>
+
+        <div id="cta">
+          <h3>Share Your Perspective</h3>
+          <p>
+            Your entry will be preserved as a first-hand account of current
+            events.
+          </p>
+          <a href="#submit-entry-section" class="cta-button"
+            >Record Your Experience</a
+          >
+        </div>
+      </section>
+
+      <!-- Current Events Section -->
+      <section id="current-events-section" class="content-section hidden">
+        <h2>Current Events</h2>
+        <p class="section-intro">
+          These are recent significant events. What are your thoughts?
+        </p>
+        <div class="event-filters">
+          <button class="filter-btn active" data-filter="all">
+            All Events
+          </button>
+          <button class="filter-btn" data-filter="global">Global</button>
+          <button class="filter-btn" data-filter="tech">Technology</button>
+          <button class="filter-btn" data-filter="culture">Culture</button>
+        </div>
+        <div class="event-list">
+          <!-- Event items will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- Submit Entry Section -->
+      <section id="submit-entry-section" class="section content-section hidden">
+        <h2>Share Your Perspective</h2>
+        <p>
+          Your anonymous account helps build a diverse archive of experiences.
+        </p>
+        <form id="submit-entry-form">
+          <div class="form-grid">
+            <div class="form-column">
+              <div class="form-group">
+                <label for="event-select">Event:</label>
+                <select id="event-select" required>
+                  <option value="">Select an event</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="entry-text">Your thoughts:</label>
+                <textarea id="entry-text" required></textarea>
+              </div>
+            </div>
+            <div class="form-column">
+              <div class="entry-guidance">
+                <h3>Guidance</h3>
+                <ol>
+                  <li>Focus on your personal experience or thoughts.</li>
+                  <li>Include specific details you find significant.</li>
+                  <li>Your entry will remain anonymous.</li>
+                  <li>Your perspective will help create a diverse archive.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="submit-entry">Add to Archive</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Browse Entries Section -->
+      <section id="browse-entries-section" class="content-section hidden">
+        <h2>Browse Entries</h2>
+        <p>Explore diverse perspectives on various events and topics.</p>
+        <div class="filters">
+          <!-- Filters will be added here -->
+        </div>
+        <div class="entries-list">
+          <!-- Entries will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- Timeline Section -->
+      <section id="timeline-section" class="content-section hidden">
+        <h2>Timeline of Events</h2>
+        <p>
+          Visualize the chronology of major events and their interconnections.
+        </p>
+        <div class="timeline-container">
+          <!-- Timeline events will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about-section" class="content-section hidden">
+        <h2>About Future Archive</h2>
+        <p>
+          Future Archive is a project dedicated to preserving first-hand
+          accounts of current events for future generations.
+        </p>
+        <!-- More about content can be added here -->
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Future Archive. All rights reserved.</p>
+      <nav>
+        <ul>
+          <li><a href="#privacy-policy">Privacy Policy</a></li>
+          <li><a href="#terms-of-service">Terms of Service</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

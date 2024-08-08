@@ -226,3 +226,71 @@ footer nav ul li a {
 ::-webkit-scrollbar-thumb:hover {
   background: #00CC00;
 }
+
+/* Responsive grid */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Responsive header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ff6b6b; /* Matching the current color scheme */
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Hide navigation links on mobile */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+  }
+  
+  /* Show hamburger icon */
+  .menu-icon {
+    display: block;
+  }
+}
+
+/* Main content adjustments */
+.content-section {
+  margin-top: 60px; /* Adjust based on your header height */
+}
+
+@media (max-width: 768px) {
+  .content-section {
+    padding: 10px;
+  }
+}
+
+/* Responsive event cards */
+.event-card {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .event-card {
+    width: calc(50% - 20px);
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .event-card {
+    width: calc(33.33% - 20px);
+  }
+}

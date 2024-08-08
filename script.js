@@ -170,3 +170,19 @@ window.addEventListener("popstate", () => {
   const sectionId = location.hash.substring(1) || "home-section";
   navigateToSection(sectionId);
 });
+
+// Toggle mobile menu
+function toggleMenu() {
+  const nav = document.querySelector("nav ul");
+  nav.classList.toggle("show");
+}
+
+// Add event listener to menu icon
+document.querySelector(".menu-icon").addEventListener("click", toggleMenu);
+
+// Close menu when a link is clicked
+document.querySelectorAll("nav a").forEach((link) => {
+  link.addEventListener("click", () => {
+    document.querySelector("nav ul").classList.remove("show");
+  });
+});

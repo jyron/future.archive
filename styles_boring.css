@@ -1,0 +1,65 @@
+/* Intentionally Boring 80s DARPA Style */
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f0f0f0;
+    color: #000;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  header {
+    background-color: #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 15px;
+  }
+  
+  .content-section {
+    background-color: #e0e0e0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #000;
+  }
+  
+  #submit-entry-section, #current-events-section, #browse-entries-section, #timeline-section, #about-section {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  footer {
+    background-color: #ccc;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #000;
+  }
+  
+  footer nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  footer nav ul li {
+    display: inline;
+    margin-right: 15px;
+  }
+  

@@ -1,18 +1,17 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  initApp();
+  window.scrollTo(0, 0);
+  initApp().catch((error) => console.error("Error initializing app:", error));
 });
 
-function initApp() {
+async function initApp() {
   setupNavigation();
-  loadCurrentEvents();
+  await loadCurrentEvents();
   setupFormSubmission();
+  setupShareThoughtsButtons();
   showInitialSection();
 }
 
 function setupNavigation() {
-  // Select all navigation links, including those in the header and elsewhere
   const allLinks = document.querySelectorAll('a[href^="#"]');
 
   allLinks.forEach((link) => {
@@ -25,112 +24,110 @@ function setupNavigation() {
 }
 
 function navigateToSection(sectionId) {
-  // Hide all sections
   document.querySelectorAll(".content-section").forEach((section) => {
     section.classList.add("hidden");
   });
 
-  // Show the selected section
   const selectedSection = document.getElementById(sectionId);
   if (selectedSection) {
     selectedSection.classList.remove("hidden");
-    selectedSection.scrollIntoView({ behavior: "smooth" });
+    if (sectionId !== "home-section") {
+      setTimeout(() => {
+        const headerHeight = document.querySelector("header").offsetHeight;
+        const yOffset = -headerHeight - 10; // Extra 10px for breathing room
+        const y =
+          selectedSection.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
+        window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+      }, 0);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }
 
-  // Update URL without page reload
   history.pushState(null, "", `#${sectionId}`);
 }
 
 function showInitialSection() {
-  const initialSectionId = location.hash.substring(1) || "home-section";
+  const initialSectionId = "home-section";
   navigateToSection(initialSectionId);
+  window.scrollTo(0, 0);
 }
 
-function loadCurrentEvents() {
-  const mockEvents = [
-    {
-      id: 1,
-      title: "Global Climate Summit",
-      date: "2024-07-15",
-      description: "World leaders gather to discuss climate change policies.",
-      category: "global",
-    },
-    {
-      id: 2,
-      title: "Major Tech Company Launches New Product",
-      date: "2024-07-20",
-      description: "Industry giant unveils revolutionary device.",
-      category: "tech",
-    },
-    {
-      id: 3,
-      title: "International Film Festival Begins",
-      date: "2024-08-01",
-      description: "Celebrating diverse cinema from around the world.",
-      category: "culture",
-    },
-    // Add more mock events as needed
-  ];
+async function loadCurrentEvents() {
+  try {
+    const events = await fetchEvents();
+    displayEvents(events);
+    populateEventSelect(events);
+  } catch (error) {
+    console.error("Error loading current events:", error);
+  }
+}
 
+function displayEvents(events) {
   const eventList = document.querySelector(".event-list");
   if (eventList) {
     eventList.innerHTML = "";
-    mockEvents.forEach((event) => {
+    events.forEach((event) => {
       const eventElement = createEventElement(event);
       eventList.appendChild(eventElement);
     });
   }
-  const eventSelect = document.getElementById("event-select");
-  if (eventSelect) {
-    eventSelect.innerHTML = '<option value="">Select an event</option>';
-    mockEvents.forEach((event) => {
-      const option = document.createElement("option");
-      option.value = event.id;
-      option.textContent = event.title;
-      eventSelect.appendChild(option);
-    });
-  }
-
-  setupEventFilters(mockEvents);
 }
 
 function createEventElement(event) {
   const eventDiv = document.createElement("div");
-  eventDiv.className = `event-item ${event.category}`;
+  eventDiv.className = "event-item";
 
   eventDiv.innerHTML = `
-        <h3>${event.title}</h3>
-        <p class="event-date">Date: ${event.date}</p>
-        <p class="event-description">${event.description}</p>
-        <a href="#submit-entry-section" class="share-thoughts-btn" data-event-id="${event.id}">Share Your Thoughts</a>
-    `;
+    <h3>${event.title}</h3>
+    <p class="event-date">Date: ${new Date(event.date).toLocaleDateString()}</p>
+    <p class="event-description">${truncateDescription(
+      event.description,
+      100
+    )}</p>
+    <a href="#submit-entry-section" class="share-thoughts-btn" data-event-id="${
+      event._id
+    }">Share Your Thoughts</a>
+  `;
 
   return eventDiv;
 }
 
-function setupEventFilters(events) {
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const filter = button.getAttribute("data-filter");
-      filterEvents(filter);
-
-      // Update active button
-      filterButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-    });
+function setupShareThoughtsButtons() {
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("share-thoughts-btn")) {
+      e.preventDefault();
+      const eventId = e.target.getAttribute("data-event-id");
+      navigateToSection("submit-entry-section");
+      selectEventInDropdown(eventId);
+    }
   });
 }
 
-function filterEvents(category) {
-  const eventItems = document.querySelectorAll(".event-item");
-  eventItems.forEach((item) => {
-    if (category === "all" || item.classList.contains(category)) {
-      item.style.display = "block";
-    } else {
-      item.style.display = "none";
-    }
-  });
+function selectEventInDropdown(eventId) {
+  const eventSelect = document.getElementById("event-select");
+  if (eventSelect) {
+    eventSelect.value = eventId;
+  }
+}
+function truncateDescription(description, maxLength) {
+  if (description.length <= maxLength) return description;
+  return description.substr(0, maxLength) + "...";
+}
+
+function populateEventSelect(events) {
+  const eventSelect = document.getElementById("event-select");
+  if (eventSelect) {
+    eventSelect.innerHTML = '<option value="">Select an event</option>';
+    events.forEach((event) => {
+      const option = document.createElement("option");
+      option.value = event._id;
+      option.textContent = event.title;
+      eventSelect.appendChild(option);
+    });
+  }
 }
 
 function setupFormSubmission() {
@@ -156,11 +153,10 @@ function submitEntry() {
       content: entryContent,
     });
 
-    // Clear the form
+    // Here you would typically send this data to your server
+    // For now, we'll just clear the form and show a confirmation
     eventSelect.value = "";
     entryText.value = "";
-
-    // Show a confirmation message
     alert("Thank you for sharing your perspective!");
   }
 }
@@ -168,6 +164,9 @@ function submitEntry() {
 // Handle browser back/forward navigation
 window.addEventListener("popstate", () => {
   const sectionId = location.hash.substring(1) || "home-section";
+  if (sectionId === "home-section") {
+    window.scrollTo(0, 0);
+  }
   navigateToSection(sectionId);
 });
 

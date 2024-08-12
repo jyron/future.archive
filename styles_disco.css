@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-color: #0a0a0a;
+  --text-color: #00ff00;
+  --primary-color: #ff00ff;
+  --secondary-color: #00ffff;
+  --accent-color: #ffff00;
+  --header-height: 60px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding-top: var(--header-height);
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, .05) 25%, rgba(0, 255, 0, .05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, .05) 75%, rgba(0, 255, 0, .05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, .05) 25%, rgba(0, 255, 0, .05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, .05) 75%, rgba(0, 255, 0, .05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+}
+
+header {
+  background-color: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--primary-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 1.8em;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--primary-color);
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-color);
+}
+
+.cta-button {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, var(--secondary-color), transparent 30%);
+  animation: rotate 4s linear infinite;
+}
+
+.cta-button::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 3px;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content-section {
+  background-color: rgba(20, 20, 20, 0.8);
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+#submit-entry-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--secondary-color);
+}
+
+#event-select, #entry-text {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--secondary-color);
+  color: var(--text-color);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+#entry-text {
+  height: 150px;
+  resize: vertical;
+}
+
+.entry-guidance {
+  background-color: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--secondary-color);
+  padding: 15px;
+}
+
+.submit-entry {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.submit-entry:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 20px var(--secondary-color);
+}
+
+#current-events-section {
+  background-color: rgba(20, 20, 20, 0.8);
+  padding: 20px;
+  border: 1px solid var(--secondary-color);
+}
+
+.event-filters {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filter-btn {
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  padding: 5px 15px;
+  margin: 0 5px 5px 0;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.event-item {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--primary-color);
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.event-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3);
+}
+
+.event-item h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.event-date {
+  font-size: 0.8em;
+  color: var(--secondary-color);
+}
+
+.event-description {
+  margin: 10px 0;
+}
+
+.share-thoughts-btn {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  padding: 5px 10px;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8em;
+  transition: all 0.3s ease;
+}
+
+.share-thoughts-btn:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 10px var(--secondary-color);
+}
+
+footer {
+  background-color: rgba(10, 10, 10, 0.8);
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 2px solid var(--primary-color);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav ul li {
+    margin: 5px;
+  }
+
+  #submit-entry-section {
+    grid-template-columns: 1fr;
+  }
+
+  .event-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+
+  .content-section {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .filter-btn {
+    padding: 3px 10px;
+    font-size: 0.8em;
+  }
+
+  .event-item {
+    padding: 10px;
+  }
+}
